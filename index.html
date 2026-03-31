@@ -1,492 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="/style.css">
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Booked, Busy & Paid</title>
-<style>
-  * { box-sizing: border-box; }
-  body{
-    margin:0;
-    background: linear-gradient(to bottom, #140b12, #24101f, #10080f);
-    color:white;
-    text-align:center;
-    font-family:Arial,sans-serif;
-    padding:10px 0 120px;
-  }
-  h2{
-    margin:14px 0 12px;
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:.3px;
-  }
-  .wrap{
-    width:min(95vw, 420px);
-    margin:0 auto;
-  }
-  #hud{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin:0 auto 10px;
-    width:min(95vw, 420px);
-  }
-  .pill{
-    min-width:110px;
-    padding:10px 14px;
-    border-radius:22px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
-    font-size:18px;
-  }
-  #game{
-    background: linear-gradient(to bottom, #2b1530, #2a1030, #240d24);
-    border-radius:24px;
-    width:100%;
-    max-width:400px;
-    display:block;
-    margin:0 auto;
-    touch-action:none;
-    box-shadow: 0 0 30px rgba(255,93,177,.14);
-    border:1px solid rgba(255,255,255,.08);
-  }
-  #shop{
-    margin:16px auto 0;
-    width:min(95vw, 420px);
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:24px;
-    padding:14px 12px 16px;
-  }
-  .shop-title{
-    font-size:22px;
-    font-weight:800;
-    margin:6px 0 14px;
-    color:#ffd8ef;
-  }
-  .btns{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-  .btn{
-    background: linear-gradient(135deg, #ff5db1, #ff86cb);
-    color:white;
-    border:none;
-    padding:16px 18px;
-    border-radius:24px;
-    font-size:17px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow: 0 8px 22px rgba(255,93,177,.28);
-  }
-  .mini{
-    color:#ffd2ea;
-    opacity:.95;
-    font-size:13px;
-    margin:10px auto 0;
-    line-height:1.35;
-  }
-  #plannerFloatingBtn{
-    position:fixed;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:calc(18px + env(safe-area-inset-bottom));
-    width:min(88vw, 360px);
-    z-index:9999;
-    border:none;
-    border-radius:28px;
-    padding:16px 20px;
-    font-size:22px;
-    font-weight:800;
-    color:white;
-    background:linear-gradient(135deg, #ff5db1, #ff86cb);
-    box-shadow:0 10px 28px rgba(255,93,177,.40);
-  }
-  #dailyNudge{
-    width:min(95vw, 420px);
-    margin:0 auto 12px;
-    padding:12px 14px;
-    border-radius:20px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    color:#ffd8ef;
-    font-size:15px;
-    line-height:1.35;
-    display:none;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Booked, Busy & Paid 💖</title>
+
+  <!-- 💖 ICON + APP SETTINGS -->
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <meta name="theme-color" content="#ff5db1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="wrap">
-  <h2>💅🏾 Booked, Busy & Paid 💸</h2>
 
-  <div id="dailyNudge"></div>
+  <h1>💅🏾 Booked, Busy & Paid 💸</h1>
 
-  <div id="hud">
-    <div class="pill">Score: <span id="score">0</span></div>
-    <div class="pill">Coins: <span id="coins">0</span></div>
-    <div class="pill">Level: <span id="level">1</span></div>
-    <div class="pill">Best: <span id="best">0</span></div>
+  <!-- DAILY NUDGE -->
+  <div id="dailyNudge" style="display:none;"></div>
+
+  <!-- SCORE HUD -->
+  <div class="hud">
+    <div>Score: <span id="score">0</span></div>
+    <div>Coins: <span id="coins">0</span></div>
+    <div>Level: <span id="level">1</span></div>
+    <div>Best: <span id="best">0</span></div>
   </div>
+
+  <!-- GAME -->
   <canvas id="game" width="400" height="600"></canvas>
 
-  <div id="shop">
-    <div class="shop-title">🛍️ Upgrade Shop</div>
-    <div class="btns">
-      <button id="widerBtn" class="btn">Wider Paddle (10)</button>
-      <button id="slowBtn" class="btn">Slow Ball (15)</button>
+  <!-- SHOP -->
+  <div class="shop">
+    <h3>🛍️ Upgrade Shop</h3>
+
+    <button id="widerBtn">Wider Paddle (10)</button>
+    <button id="slowBtn">Slow Ball (15)</button>
+
+    <div class="mini">
+      Planner clicks: <span id="clickCount">0</span>
     </div>
-    <div class="mini">Catch the bag. Stay focused. Don’t get distracted.</div>
-    <div class="mini">Planner clicks: <span id="clickCount">0</span></div>
+
+    <div class="mini">
+      Catch the bag. Stay focused. Don’t get distracted.
+    </div>
   </div>
-</div>
 
-<button id="plannerFloatingBtn">Shop Planner 💖</button>
+  <!-- MAIN CTA -->
+  <button id="shopBtn" class="planner-btn">
+    Shop Planner 💖
+  </button>
 
-<script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-const plannerFloatingBtn = document.getElementById("plannerFloatingBtn");
-const widerBtn = document.getElementById("widerBtn");
-const slowBtn = document.getElementById("slowBtn");
-const dailyNudge = document.getElementById("dailyNudge");
-const clickCountEl = document.getElementById("clickCount");
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
 
-const scoreEl = document.getElementById("score");
-const coinsEl = document.getElementById("coins");
-const levelEl = document.getElementById("level");
-const bestEl = document.getElementById("best");
-
-let gameState = "start";
-let score = 0;
-let coins = 0;
-let level = 1;
-let best = Number(localStorage.getItem("bbpBest")) || 0;
-let plannerClicks = Number(localStorage.getItem("bbpPlannerClicks")) || 0;
-bestEl.textContent = best;
-clickCountEl.textContent = plannerClicks;
-
-let sparkles = [];
-let moneyDrops = [];
-let hitTexts = [];
-let frame = 0;
-
-const bounceEmojis = ["💖","💸","💎","✨"];
-const decorEmojis = ["🌹","💸","📔","✨"];
-
-const paddle = { x: 145, y: 548, w: 110, h: 14 };
-const ball = { x: 200, y: 300, r: 12, dx: 3.2, dy: -3.2 };
-
-function vibrate(ms){
-  if (navigator.vibrate) navigator.vibrate(ms);
-}
-
-function setLastPlayedToday(){
-  const today = new Date().toISOString().slice(0,10);
-  localStorage.setItem("bbpLastPlayed", today);
-}
-
-function showDailyNudge(){
-  const today = new Date().toISOString().slice(0,10);
-  const lastPlayed = localStorage.getItem("bbpLastPlayed");
-
-  if (lastPlayed !== today) {
-    dailyNudge.style.display = "block";
-    dailyNudge.textContent = "👀 You haven’t played today… get back to your rich life 💖";
-  } else {
-    dailyNudge.style.display = "none";
-  }
-}
-
-function trackPlannerClick(){
-  plannerClicks += 1;
-  localStorage.setItem("bbpPlannerClicks", plannerClicks);
-  clickCountEl.textContent = plannerClicks;
-}
-
-function updateHUD(){
-  scoreEl.textContent = score;
-  coinsEl.textContent = coins;
-  levelEl.textContent = level;
-  bestEl.textContent = best;
-  clickCountEl.textContent = plannerClicks;
-}
-
-function resetBall() {
-  ball.x = 200;
-  ball.y = 300;
-  ball.dx = Math.random() > 0.5 ? 3.2 : -3.2;
-  ball.dy = -3.2;
-}
-
-function hardResetToStart(){
-  gameState = "start";
-  score = 0;
-  coins = 0;
-  level = 1;
-  moneyDrops = [];
-  hitTexts = [];
-  resetBall();
-  updateHUD();
-}
-
-function spawnSparkles(){
-  if (sparkles.length < 22 && Math.random() < 0.12){
-    sparkles.push({
-      x: Math.random() * 400,
-      y: Math.random() * 600,
-      size: Math.random() * 8 + 8,
-      alpha: Math.random() * 0.25 + 0.08,
-      emoji: Math.random() > .5 ? "✨" : "✦"
-    });
-  }
-}
-
-function spawnHitText(text, x, y){
-  hitTexts.push({text, x, y, life: 40});
-}
-
-function spawnMoneyBurst(x, y){
-  for(let i=0;i<4;i++){
-    moneyDrops.push({
-      x: x + (Math.random()*16 - 8),
-      y: y + (Math.random()*16 - 8),
-      speed: 1.2 + Math.random()*1.2,
-      drift: Math.random()*1.4 - 0.7,
-      emoji: decorEmojis[Math.floor(Math.random()*decorEmojis.length)],
-      life: 80
-    });
-  }
-}
-
-function drawBackground(){
-  const grad = ctx.createLinearGradient(0,0,0,600);
-  grad.addColorStop(0,"#35153d");
-  grad.addColorStop(.6,"#2a1030");
-  grad.addColorStop(1,"#230d24");
-  ctx.fillStyle = grad;
-  ctx.fillRect(0,0,400,600);
-
-  ctx.globalAlpha = .12;
-  ctx.fillStyle = "#ff69bc";
-  ctx.fillRect(0, 500, 400, 90);
-  ctx.globalAlpha = 1;
-
-  for (let i = 0; i < sparkles.length; i++){
-    const s = sparkles[i];
-    ctx.globalAlpha = s.alpha;
-    ctx.font = s.size + "px serif";
-    ctx.fillText(s.emoji, s.x, s.y);
-  }
-  ctx.globalAlpha = 1;
-}
-
-function drawStartScreen() {
-  drawBackground();
-
-  ctx.fillStyle = "rgba(0,0,0,0.35)";
-  ctx.fillRect(32, 168, 336, 170);
-
-  ctx.fillStyle = "#fff";
-  ctx.font = "bold 26px Arial";
-  ctx.fillText("Welcome to your rich life 💖", 40, 220);
-
-  ctx.fillStyle = "#ffd4ea";
-  ctx.font = "21px Arial";
-  ctx.fillText("Catch the bag. Stay focused.", 56, 265);
-  ctx.fillText("Tap to Start", 127, 315);
-
-  ctx.font = "18px serif";
-  ctx.fillText("🌹  💸  ✨  📔", 130, 360);
-}
-
-function drawPaddle() {
-  ctx.save();
-  ctx.fillStyle = "#ff5db1";
-  ctx.shadowBlur = 18;
-  ctx.shadowColor = "rgba(255,146,202,.52)";
-  ctx.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.restore();
-
-  ctx.font = "18px serif";
-  ctx.fillText("📔", paddle.x + paddle.w/2 - 8, paddle.y - 6);
-}
-
-function drawBall() {
-  const emoji = bounceEmojis[Math.floor(frame / 8) % bounceEmojis.length];
-  ctx.font = "34px serif";
-  ctx.fillText(emoji, ball.x - 14, ball.y + 11);
-}
-
-function drawMoneyDrops(){
-  for (const m of moneyDrops){
-    ctx.globalAlpha = Math.max(.15, m.life / 80);
-    ctx.font = "22px serif";
-    ctx.fillText(m.emoji, m.x, m.y);
-  }
-  ctx.globalAlpha = 1;
-}
-
-function drawHitTexts(){
-  for (const h of hitTexts){
-    ctx.globalAlpha = Math.max(.15, h.life / 40);
-    ctx.fillStyle = "#ffd8ef";
-    ctx.font = "bold 28px Arial";
-    ctx.fillText(h.text, h.x, h.y);
-  }
-  ctx.globalAlpha = 1;
-}
-
-function drawGame() {
-  drawBackground();
-  drawPaddle();
-  drawBall();
-  drawMoneyDrops();
-  drawHitTexts();
-}
-
-function updateGame() {
-  frame++;
-  spawnSparkles();
-
-  ball.x += ball.dx;
-  ball.y += ball.dy;
-
-  if (ball.x + ball.r > 400 || ball.x - ball.r < 0) {
-    ball.dx *= -1;
-    spawnMoneyBurst(ball.x, ball.y);
-    vibrate(8);
-  }
-  if (ball.y - ball.r < 0) {
-    ball.dy *= -1;
-    spawnMoneyBurst(ball.x, ball.y);
-    vibrate(8);
-  }
-
-  if (
-    ball.y + ball.r >= paddle.y &&
-    ball.x >= paddle.x &&
-    ball.x <= paddle.x + paddle.w &&
-    ball.dy > 0
-  ) {
-    ball.dy *= -1;
-    score += 1;
-    coins += 2;
-
-    if (score % 5 === 0) level += 1;
-
-    if (score > best) {
-      best = score;
-      localStorage.setItem("bbpBest", best);
-    }
-
-    spawnMoneyBurst(ball.x, ball.y);
-    spawnHitText(score % 2 === 0 ? "PAID! 💸" : "BOOKED! ✨", 138, 118);
-    vibrate(15);
-
-    ball.dx *= 1.02;
-    ball.dy *= 1.02;
-    updateHUD();
-  }
-
-  if (ball.y - ball.r > 600) {
-    vibrate(30);
-    hardResetToStart();
-  }
-
-  for (let i = moneyDrops.length - 1; i >= 0; i--){
-    moneyDrops[i].y += moneyDrops[i].speed;
-    moneyDrops[i].x += moneyDrops[i].drift;
-    moneyDrops[i].life -= 1;
-    if (moneyDrops[i].life <= 0) moneyDrops.splice(i,1);
-  }
-
-  for (let i = hitTexts.length - 1; i >= 0; i--){
-    hitTexts[i].y -= .6;
-    hitTexts[i].life -= 1;
-    if (hitTexts[i].life <= 0) hitTexts.splice(i,1);
-  }
-}
-
-function loop() {
-  if (gameState === "start") {
-    drawStartScreen();
-  } else {
-    updateGame();
-    drawGame();
-  }
-  requestAnimationFrame(loop);
-}
-
-function movePaddle(clientX) {
-  const rect = canvas.getBoundingClientRect();
-  let newX = ((clientX - rect.left) / rect.width) * 400 - paddle.w / 2;
-  if (newX < 0) newX = 0;
-  if (newX + paddle.w > 400) newX = 400 - paddle.w;
-  paddle.x = newX;
-}
-
-canvas.addEventListener("click", () => {
-  if (gameState === "start") {
-    gameState = "playing";
-    setLastPlayedToday();
-    showDailyNudge();
-    resetBall();
-    vibrate(10);
-  }
-});
-
-canvas.addEventListener("touchstart", (e) => {
-  if (gameState === "start") {
-    gameState = "playing";
-    setLastPlayedToday();
-    showDailyNudge();
-    resetBall();
-    vibrate(10);
-  }
-  movePaddle(e.touches[0].clientX);
-}, { passive: true });
-
-canvas.addEventListener("touchmove", (e) => {
-  movePaddle(e.touches[0].clientX);
-}, { passive: true });
-
-canvas.addEventListener("mousemove", (e) => {
-  movePaddle(e.clientX);
-});
-
-widerBtn.addEventListener("click", () => {
-  if (coins >= 10) {
-    coins -= 10;
-    paddle.w = Math.min(180, paddle.w + 24);
-    updateHUD();
-    vibrate(10);
-  }
-});
-
-slowBtn.addEventListener("click", () => {
-  if (coins >= 15) {
-    coins -= 15;
-    ball.dx *= .84;
-    ball.dy *= .84;
-    updateHUD();
-    vibrate(10);
-  }
-});
-
-plannerFloatingBtn.addEventListener("click", () => {
-  trackPlannerClick();
-  vibrate(12);
-  window.location.href = "https://square.link/u/8kqPFCgV?src=sheet";
-});
-
-showDailyNudge();
-updateHUD();
-loop();
-</script>
 </body>
+</html>
+    <script src="/script.js"></script>
+  </body>
+
 </html>

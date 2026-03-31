@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, #140b12, #24101f, #10080f);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.app {
+  width: min(95vw, 420px);
+  margin: 0 auto;
+  padding: 14px 0 120px;
+}
+
+h1 {
+  font-size: 28px;
+  margin: 10px 0 14px;
+}
+
+.nudge {
+  display: none;
+  margin: 0 auto 12px;
+  padding: 12px 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #ffd8ef;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  padding: 10px 16px;
+  min-width: 120px;
+  font-size: 18px;
+}
+
+canvas {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 24px;
+  background: linear-gradient(to bottom, #2b1530, #2a1030, #240d24);
+  box-shadow: 0 0 30px rgba(255, 93, 177, 0.16);
+  touch-action: none;
+}
+
+.shop {
+  margin: 16px auto 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 14px 12px 16px;
+}
+
+.shop-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 6px 0 14px;
+  color: #ffd8ef;
+}
+
+.shop-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 24px;
+  padding: 16px 18px;
+  font-size: 17px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #ff5db1, #ff86cb);
+  box-shadow: 0 8px 22px rgba(255, 93, 177, 0.3);
+}
+
+.shop-planner-btn {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  width: min(88vw, 360px);
+  z-index: 9999;
+  font-size: 22px;
+  border-radius: 28px;
+  padding: 16px 20px;
+}
+
+.mini {
+  color: #ffd2ea;
+  opacity: 0.95;
+  font-size: 13px;
+  margin: 10px auto 0;
+  line-height: 1.35;
+}
